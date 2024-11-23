@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: visits
+  labels:
+    app: visits
+spec:
+  selector:
+    matchLabels:
+      app: visits
+  template:
+    metadata:
+      labels:
+        app: visits
+    spec:
+      containers:
+        - image: tuxotron/visits-amd64 # usa la imagen tuxotron/visits-arm64 si usas arquitectura ARM
+          name: visits
+          env:
+            - name: REDIS_SERVER
+              value: redis
+
+          ports:
+            - containerPort: 8080
+              name: visits
+
+
